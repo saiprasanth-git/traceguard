@@ -29,8 +29,8 @@ dev = ["pytest>=7.4", "ruff>=0.5"]
 traceguard = "traceguard.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/prasanth-grandhisiri/traceguard"
-Issues = "https://github.com/prasanth-grandhisiri/traceguard/issues"
+Homepage = "https://github.com/saiprasanth-git/traceguard"
+Issues = "https://github.com/saiprasanth-git/traceguard/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

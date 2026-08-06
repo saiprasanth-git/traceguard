@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# C build output
+*.o
+*.a
+*.so
+*.gcda
+*.gcno
+*.gcov
+
+# Editors and OS
+.vscode/
+.idea/
+*.swp
+.DS_Store

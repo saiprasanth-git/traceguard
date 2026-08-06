@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tool:
+    name: Tool (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install
+        run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Unit tests
+        run: pytest
+
+  example:
+    name: Example (build, verify, trace)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install TraceGuard
+        run: python -m pip install --upgrade pip && python -m pip install -e .
+
+      - name: Compile and run the verification suite
+        working-directory: examples/altitude_hold
+        run: make test
+
+      - name: Requirements traceability gate
+        working-directory: examples/altitude_hold
+        run: traceguard check --root .
+
+      - name: Generate traceability artefacts
+        working-directory: examples/altitude_hold
+        run: make report
+
+      - name: Job summary
+        working-directory: examples/altitude_hold
+        run: cat build/traceability.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload traceability evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: traceability-evidence
+          path: examples/altitude_hold/build/traceability.*
+          if-no-files-found: error

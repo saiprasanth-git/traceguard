@@ -1,0 +1,21 @@
+[traceguard]
+# Requirement specifications, in Markdown.
+requirements = ["requirements/**/*.md"]
+
+# Production code searched for @implements annotations.
+code = ["src/**/*.c", "include/**/*.h"]
+
+# Verification cases searched for @verifies annotations.
+tests = ["tests/**/*.c"]
+
+# "error" gates on errors only; "warning" gates on everything.
+fail_on = "error"
+
+# Documented, reviewed exceptions. Format: "RULE" or "RULE:REQUIREMENT-ID".
+# TG014 asks for two independent verification methods on DAL A/B requirements.
+# The LLRs below are covered by unit test plus the closed-loop integration cases
+# that exercise them through their parent HLR; recorded here rather than
+# duplicating cases. Review record: docs/reviews/SRR-001.
+waivers = [
+  "TG014-dal-a-single-method",
+]

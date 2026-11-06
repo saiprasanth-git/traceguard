@@ -1,5 +1,11 @@
 # TraceGuard
 
+[![CI](https://github.com/saiprasanth-git/traceguard/actions/workflows/ci.yml/badge.svg)](https://github.com/saiprasanth-git/traceguard/actions/workflows/ci.yml)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue)](pyproject.toml)
+[![Zero Dependencies](https://img.shields.io/badge/dependencies-stdlib%20only-2ea043)](pyproject.toml)
+[![DO-178C / ISO 26262](https://img.shields.io/badge/safety--critical-DO--178C%20%7C%20ISO%2026262-d97706)](docs/do178c-mapping.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 Requirements traceability gate for safety-critical software.
 
 TraceGuard reads your requirement specifications, the `@implements` annotations
